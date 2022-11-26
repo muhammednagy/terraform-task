@@ -8,3 +8,13 @@ variable "s3bucket" {
   default     = "nagy-content-bucket"
   type        = string
 }
+
+variable "alternate_domain" {
+  description = "Please enter alternate domain to be used to serve from (must provide certificate ARN as well, leave empty in case not needed)"
+  type        = string
+}
+
+variable "certificate_arn" {
+  description = "Please enter  certificate ARN to be used with alternate domain (leave empty in case not needed)"
+  type        = string
+}

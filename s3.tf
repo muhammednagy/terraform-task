@@ -44,8 +44,8 @@ data "aws_iam_policy_document" "s3_private_bucket" {
 
 resource "aws_s3_object" "file_upload" {
   provider = aws.s3
-  bucket = var.s3bucket
-  key    = "index.html"
-  source = "${path.module}/index.html"
-  etag   = filemd5("${path.module}/index.html")
+  bucket   = var.s3bucket
+  key      = "index.html"
+  source   = "${path.module}/index.html"
+  etag     = filemd5("${path.module}/index.html")
 }
