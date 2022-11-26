@@ -1,6 +1,5 @@
 resource "aws_cloudfront_origin_access_identity" "cloudfront_origin" {
-  provider = aws.cloudfront
-  comment  = "cloudfront_origin"
+  comment = "cloudfront_origin"
 
   lifecycle {
     create_before_destroy = true
@@ -8,8 +7,7 @@ resource "aws_cloudfront_origin_access_identity" "cloudfront_origin" {
 }
 
 resource "aws_cloudfront_distribution" "cloudfront_distribution" {
-  provider            = aws.cloudfront
-  comment             = "Nagy's Awesome cloudfront distribution"
+  comment             = var.comment
   enabled             = true
   http_version        = "http2"
   is_ipv6_enabled     = true
@@ -17,10 +15,10 @@ resource "aws_cloudfront_distribution" "cloudfront_distribution" {
   retain_on_delete    = false
   wait_for_deployment = false
   default_root_object = "index.html"
-  aliases             = local.use_alternate_domain ? [var.alternate_domain] : null
+  aliases             = var.alias != "" ? [var.alias] : []
 
   origin {
-    domain_name = aws_s3_bucket.content_bucket.bucket_regional_domain_name
+    domain_name = "${var.bucket_name}.s3.amazonaws.com"
     origin_id   = "cloudfront_origin"
 
     s3_origin_config {
@@ -54,7 +52,7 @@ resource "aws_cloudfront_distribution" "cloudfront_distribution" {
 
   viewer_certificate {
     cloudfront_default_certificate = true
-    acm_certificate_arn            = local.use_alternate_domain ? var.certificate_arn : null
+    acm_certificate_arn            = var.acm_certificate_arn
     ssl_support_method             = "sni-only"
     minimum_protocol_version       = "TLSv1"
   }
