@@ -38,10 +38,13 @@ data "aws_iam_policy_document" "s3_private_bucket" {
 }
 
 resource "aws_s3_object" "file_upload" {
-  depends_on = [aws_s3_bucket.content_bucket]
+  depends_on = [
+    aws_s3_bucket.content_bucket
+  ]
+
   bucket       = var.s3bucket
   key          = "index.html"
   content_type = "text/html"
-  source       = "${path.root}/index.html"
-  etag         = filemd5("${path.root}/index.html")
+  source       = var.index_file_path
+  etag         = filemd5(var.index_file_path)
 }
