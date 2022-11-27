@@ -1,7 +1,8 @@
 # IaC Cloudfront + s3 with different account and alternate domain
 Terraform project that creates an S3 bucket and a cloudfront distribution to serve content from that bucket (from different accounts) with alternate domain support
 
-Feel free to check the end result [here](https://cloudfront.muhnagy.com)
+Feel free to check the end result [here](https://cloudfront.muhnagy.com) or [here (cloudfront url)](https://d3mymmddqx0v3n.cloudfront.net)
+
 ## Setup
 
 1. Clone this repo.
