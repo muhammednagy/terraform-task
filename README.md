@@ -57,7 +57,15 @@ This was made with the assumption that it will be used on empty AWS accounts the
 7. `versions.tf` Defines required provider and version
 8. `terraform.tfvars` contains values for variables
 
+## Architecture
+Users open the website which is managed by Route 53 (in my case my domain is managed by cloudflare).
+
+They would be served  with the cloudfront distribution which uses a certificate hosted at ACM.
+
+The content will be served from the S3 bucket from the other account.
+![Diagram](diagram.png)
 ## What to improve
 There wasn't a lot of details on how it should look like, but I would
 1. Add Route 53 support to automatically generate certificate for an already existing domain in Route 53
 2. Add a lot more variables to the modules to make it more reusable in different scenarios, but I figured no need to do that unless a case comes up
+3. Possibly using acme provider (certbot) with cloudflare (my domain is hosted on cloudflare) to generate the certificate and upload it but I think for the case of the task it might be too much for now, but probably good idea for real world scenario.
