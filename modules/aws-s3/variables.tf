@@ -10,5 +10,5 @@ variable "cloudfront_origin_iam_arn" {
 
 variable "index_file_path" {
   description = "path for index file for bucket"
-  type = string
+  type        = string
 }

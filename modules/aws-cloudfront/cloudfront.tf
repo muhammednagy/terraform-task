@@ -24,7 +24,6 @@ resource "aws_cloudfront_distribution" "cloudfront_distribution" {
     s3_origin_config {
       origin_access_identity = aws_cloudfront_origin_access_identity.cloudfront_origin.cloudfront_access_identity_path
     }
-
   }
 
   default_cache_behavior {
@@ -38,8 +37,8 @@ resource "aws_cloudfront_distribution" "cloudfront_distribution" {
     allowed_methods = ["GET", "HEAD"]
     cached_methods  = ["GET", "HEAD"]
     compress        = true
-    forwarded_values {
 
+    forwarded_values {
       query_string            = false
       query_string_cache_keys = []
       headers                 = []
@@ -58,7 +57,6 @@ resource "aws_cloudfront_distribution" "cloudfront_distribution" {
   }
 
   custom_error_response {
-
     error_code         = 403
     response_code      = 404
     response_page_path = "/404.html"

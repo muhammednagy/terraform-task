@@ -3,7 +3,7 @@ locals {
 }
 
 module "cloudfront" {
-  source     = "./modules/aws-cloudfront"
+  source = "./modules/aws-cloudfront"
   providers = {
     aws : aws.cloudfront
   }
@@ -16,6 +16,9 @@ module "cloudfront" {
 
 module "s3" {
   source = "./modules/aws-s3"
+  depends_on = [
+    module.cloudfront
+  ]
   providers = {
     aws : aws.s3
   }
