@@ -1,4 +1,5 @@
 resource "aws_s3_bucket" "content_bucket" {
+  count         = var.create_bucket ? 1 : 0
   bucket        = var.s3bucket
   force_destroy = true
 }
@@ -24,8 +25,8 @@ data "aws_iam_policy_document" "s3_private_bucket" {
     effect = "Allow"
 
     resources = [
-      aws_s3_bucket.content_bucket.arn,
-      "${aws_s3_bucket.content_bucket.arn}/*",
+      data.aws_s3_bucket.content_bucket.arn,
+      "${data.aws_s3_bucket.content_bucket.arn}/*",
     ]
 
     principals {

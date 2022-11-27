@@ -26,4 +26,5 @@ module "s3" {
   cloudfront_origin_iam_arn = module.cloudfront.cloudfront_origin_iam_arn
   s3bucket                  = var.s3bucket
   index_file_path           = "${path.root}/include/index.html"
+  create_bucket             = var.create_bucket
 }
