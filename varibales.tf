@@ -16,11 +16,16 @@ variable "create_bucket" {
 }
 
 variable "alternate_domain" {
-  description = "Please enter alternate domain to be used to serve from (must provide certificate ARN as well, leave empty in case not needed)"
+  description = "Please enter alternate domain to be used to serve from"
   type        = string
+  validation {
+    condition = var.alternate_domain != ""
+    error_message = "alternate_domain cannot be empty"
+  }
 }
 
-variable "certificate_arn" {
-  description = "Please enter  certificate ARN to be used with alternate domain (leave empty in case not needed)"
+variable "subdomain_for_alternate_domain" {
+  description = "Please enter subdomain to be used with provided alternate domain (leave empty if you don't want to use subdomains)"
   type        = string
+  default = ""
 }
