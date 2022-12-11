@@ -1,12 +1,12 @@
 variable "name" {
-  type = string
+  type    = string
   default = ""
 }
 
 variable "target" {
   type = string
   validation {
-    condition = var.target != ""
+    condition     = var.target != ""
     error_message = "target can't be empty"
   }
 }
@@ -14,7 +14,7 @@ variable "target" {
 variable "type" {
   type = string
   validation {
-    condition = var.type != ""
+    condition     = var.type != ""
     error_message = "Type can't be empty"
   }
 }
